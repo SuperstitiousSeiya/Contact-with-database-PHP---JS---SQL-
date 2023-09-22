@@ -1,0 +1,80 @@
+/* table td, table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+   */
+  table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #04AA6D;
+    color: white;
+  }
+    /* table{
+      margin-left: 50px !important;
+    } */
+
+  /* table tbody tr .functions{
+    opacity: 0;
+  }
+  
+  table tbody tr:hover .functions{
+    opacity: 1 !important;
+  } */
+
+.modal form label{
+  color: rgba(255, 255, 255, 0.644) !important;
+}
+
+/* table tr:nth-of-type(even) td{
+  background-color: #000000;
+} */
+
+
+
+table .highlighted td{
+  background-color: #505050 !important;
+}
+
+
+.contact {
+  
+
+  &:hover{
+
+    & td{
+      background-color: #181818;
+    }
+   
+
+    
+
+  }
+
+  transition: all 0.25s;
+& td{
+  transition: all 0.25s;
+}
+
+  .functions {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  .bi-trash {
+    background-color: transparent;
+    cursor: pointer;
+    & svg {
+      transform: scale(1.3);
+      color: red;
+      padding: 0;
+      transition: all 0.25s;
+      &:hover{
+        transform: scale(1.4);
+      }
+
+    }
+  }
+}

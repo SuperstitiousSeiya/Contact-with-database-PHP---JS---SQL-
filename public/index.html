@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Table Exercise</title>
+  <!-- bootstrap  -->
+    <link rel="stylesheet" href="../src/bootstrap/css/bootstrap.min.css" />
+    <script src="../src/bootstrap/js/bootstrap.min.js" defer></script>
+
+    <!-- styles  -->
+    <link rel="stylesheet" href="../src/css/style.css" />
+
+    <!-- scripts  -->
+    <script src="../src/js/dataHandler.js" defer></script>
+    <script src="../src/js/script.js" defer></script>
+    <script src="../src/js/validators.js" defer></script>
+  </head>
+
+  
+  <body class="bg-dark">
+    <div class="container p-3">
+      <h1 class="text-light text-center p-3">Contact List</h1>
+      <table class="table table-dark table-hover" id="contacts">
+        <thead>
+        <tr class="mb-3 table-active">
+          <th>Last Name</th>
+          <th>First Name</th>
+          <th>Email Address</th>
+          <th>Contact Number</th>
+          <!-- <th></th> -->
+        </tr>
+      </thead>
+
+      <tbody>
+ 
+      </tbody>
+      </table>
+
+      <button
+        type="button"
+        class="btn btn-success"
+        data-bs-toggle="modal"
+        data-bs-target="#createModalForm"
+      >
+        Create Contact
+      </button>
+
+      <!-- modal for creation -->
+      <div
+        class="modal fade"
+        id="createModalForm"
+        data-bs-theme="dark"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 text-light" id="staticBackdropLabel">
+                Create Contact  
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form action=""  method="POST" id="createContactForm" class=" dark-mode-form" novalidate>
+                <div class="form-floating is-invalid mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="firstname"
+                    placeholder="First Name"
+                    id="floatingFirst"
+                    required
+                  />
+                  <label for="floatingFirst">First Name</label>
+                  <div class="invalid-feedback">
+                    Please enter your first name
+                  </div>
+                </div>
+                <div class="form-floating is-invalid mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="lastname"
+                    placeholder="Last Name"
+                    id="floatingLast"
+                    required
+                  />
+                  <label for="floatingLast">Last Name</label>
+                  <div class="invalid-feedback">
+                    Please enter your last name
+                  </div>
+                </div>
+
+                <div class="form-floating is-invalid mb-3">
+                  <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    placeholder="Email"
+                    id="floatingEmail"
+                    required
+                  />
+                  <label for="floatingEmail">Email address</label>
+                  <div class="invalid-feedback">
+                    Please enter a valid Email Address
+                  </div>
+                </div>
+
+                <div class="input-group has-validation is-invalid" id="contactNumber">
+                  <span class="input-group-text" id="basic-addon1">+63</span>
+                  <div class="form-floating is-invalid">
+                    <input
+                    type="text"
+                     maxlength="10"
+                      class="form-control"
+                      name="contactNumber"
+                      placeholder="Contact Number"
+                      id="floatingContact"
+                      required
+                    />
+                    <label for="floatingContact">Contact Number</label>
+                    <div class="invalid-tooltip">
+                      Number must contain 10 digits e.g (91xxxxxxxx)
+                    </div>
+                  </div>
+
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="submit"
+                    class="btn btn-success mt-4"
+                    name="submit"
+                    id="submitBtn"
+                  >
+                    Add Contact
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      <!-- modal for edit  -->
+      <div
+        class="modal fade"
+        id="editModalForm"
+        data-bs-theme="dark"
+        data-bs-keyboard="false"
+        tabindex="-1"
+        aria-labelledby="staticBackdropLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5 text-light" id="staticBackdropLabel">
+                Edit Contact
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form action="" id="edit-modal"  class="" novalidate>
+                <div class="form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="firstname"
+                    placeholder="First Name"
+                    id="floatingFirst"
+                    required
+                  />
+                  <label for="floatingFirst">First Name</label>
+                  <div class="invalid-feedback">
+                    Please enter your first name
+                  </div>
+                </div>
+                <div class="form-floating mb-3">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="lastname"
+                    placeholder="Last Name"
+                    id="floatingLast"
+                    required
+                  />
+                  <label for="floatingLast">Last Name</label>
+                  <div class="invalid-feedback">
+                    Please enter your last name
+                  </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                  <input
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    placeholder="Email"
+                    id="floatingEmail"
+                    required
+                  />
+                  <label for="floatingEmail">Email address</label>
+                  <div class="invalid-feedback">
+                    Please enter a valid email
+                  </div>
+                </div>
+
+                <div class="input-group">
+                  <span class="input-group-text" id="basic-addon1">+63</span>
+                  <div class="form-floating">
+                    <input
+                      type="text"
+                      pattern="9\d{9}" maxlength="10"
+                      class="form-control"
+                      name="contactNumber"
+                      placeholder="Contact Number"
+                      id="floatingContact"
+                      required
+                    />
+                    <label for="floatingContact">Contact Number</label>
+                    <div class="invalid-tooltip">
+                      Number must contain 10 digits e.g (91xxxxxxxx)
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-success" 
+>
+                    Apply Edit
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+      
+    </div>
+  </body>
+ 
+</html>
