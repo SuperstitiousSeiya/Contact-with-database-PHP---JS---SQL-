@@ -1,6 +1,4 @@
 const formValidator = (form, res) => {
-  let isValid = true;
-
   form.querySelectorAll("input").forEach((input) => {
     input.classList.remove("is-invalid");
 

@@ -5,6 +5,7 @@ let contactContainer = document.querySelector(".contact-container"),
   contactsEl = document.querySelectorAll(".contact");
 trash = document.querySelectorAll(".trash");
 const CONTACT_ITEM_KEY = "contacts";
+const createContactBtn = document.getElementById("createContactBtn");
 
 const php = {
   retrieveContact: "../src/php/retrieveContacts.php",
@@ -23,13 +24,14 @@ async function getContacts() {
     contactList = data;
     renderContacts();
   } catch (e) {
+    console.log(e);
     console.log("Error 404: Couldn't fetch data from API");
   }
 }
 
 // render the getcontacts and render contacts
-const render = () => {
-  getContacts();
+const render = async () => {
+  await getContacts();
 };
 
 //creates data to database
@@ -50,11 +52,10 @@ formEl.addEventListener("submit", async (e) => {
   const createModalForm = await document.getElementById("createModalForm");
   await modalCloser(formEl);
 
-  await formEl.querySelectorAll("input").forEach((input) => {
+  formEl.querySelectorAll("input").forEach((input) => {
     input.value = "";
     input.classList.remove("is-invalid");
-    });
-  
+  });
 });
 
 // edit specific row
@@ -71,16 +72,17 @@ editModalEl.addEventListener("submit", async (e) => {
   };
 
   const res = await action(php.editContact, formData);
-  formValidator(editModalEl, res);
-
+  await formValidator(editModalEl, res);
   if (!res.message == "") return;
-  const editModalForm = document.getElementById("editModalForm");
+
   editModalEl.querySelectorAll("input").forEach((input) => {
-    input.value ="";
+    input.value = "";
     input.classList.remove("is-invalid");
   });
-  modalCloser(editModalEl);
+
+   await modalCloser(editModalEl);
   render();
+  highlightRow(editModalEl.dataset.id);
 });
 
 // delete specific row

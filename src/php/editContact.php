@@ -38,18 +38,30 @@ $contact = $conn->real_escape_string($formData->contact_number);
         $retVal['email_address'] = "Please enter a valid Email Address";
     }
     
-    // // Check if email already exists
-    // if($isValid){
-    //     $stmt = $conn->prepare("SELECT * FROM contacts WHERE email_address = ?");
-    //     $stmt->bind_param("s", $email);
-    //     $stmt->execute();
-    //     $result = $stmt->get_result();
-    //     $stmt->close();
-    //     if($result->num_rows > 0){
-    //         $isValid = false;
-    //         $retVal['email_address'] = "Email already exists.";
-    //     }
-    // }
+    // Check if email already exists
+    if($isValid){
+        $stmt = $conn->prepare("SELECT * FROM contacts WHERE email_address = ?");
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        $currentEmail = $conn->prepare("SELECT * FROM contacts WHERE email_address = ? AND id = ?");
+        $currentEmail->bind_param("si", $email, $id);
+        $currentEmail->execute();
+        $currentEmailResult = $currentEmail->get_result();
+        
+        $stmt->close();
+        if($result->num_rows > 0){
+            
+            if($currentEmailResult->num_rows > 0){
+               
+            }else{
+                $isValid = false;
+                $retVal['email_address'] = "Email already exists.";
+            }
+
+        }
+    }
 
     // check contact validity 
     if($isValid && !(preg_match("/^9\d{9}$/", $contact))){

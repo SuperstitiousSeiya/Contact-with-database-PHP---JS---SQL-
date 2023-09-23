@@ -36,7 +36,7 @@ function handleEdit(e) {
   editModalEl.dataset.id = selectedID; // Set the selectedID as a data attribute
   editModalEl.querySelectorAll("input").forEach((input) => {
     const name = input.getAttribute("name");
-
+    input.classList.remove('is-invalid');
     switch (name) {
       case "firstname":
         input.value = foundContact.firstname;
@@ -56,6 +56,13 @@ function handleEdit(e) {
   });
 }
 
+
+
+createContactBtn.addEventListener('click', ()=>{
+  formEl.querySelectorAll('input').forEach((input)=>{
+    input.classList.remove('is-invalid');
+  })
+})
 //
 
 // Functions //
@@ -73,16 +80,17 @@ function modalCloser(formEl) {
 
 
 // highlight edit row in table
-// function highlightRow(id) {
-//   tableEl.querySelectorAll(".contact").forEach((row) => {
-//     if (row.dataset.id == id) {
-//       row.classList.add("highlighted");
-//       setTimeout(function () {
-//         row.classList.remove("highlighted");
-//       }, 2000);
-//     }
-//   });
-// }
+function highlightRow(id) {
+  tableEl.querySelectorAll(".contact").forEach((row) => {
+    console.log(row)
+    if (row.dataset.id == id) {
+      row.classList.add("highlighted");
+      setTimeout(function () {
+        row.classList.remove("highlighted");
+      }, 2000);
+    }
+  });
+}
 
 
 // clearElement
@@ -93,6 +101,8 @@ function clearElement(element) {
 
 // render contacts
 function renderContacts() {
+
+
   let contactEle = document.querySelectorAll(".contact");
   contactEle.forEach((contact) => {
     clearElement(contact);
@@ -102,9 +112,11 @@ function renderContacts() {
     let contactEle = document.createElement("tr");
     contactEle.classList.add("contact");
     contactEle.setAttribute("data-id", contact.id);
-
-    contactEle.innerHTML = `<td class="last-name">${contact.lastname}</td>
-<td class="first-name">${contact.firstname}</td>
+    
+    let modifiedFirst = contact.firstname.charAt(0).toUpperCase() + contact.firstname.slice(1)
+    let modifiedLast = contact.lastname.charAt(0).toUpperCase() + contact.lastname.slice(1)
+    contactEle.innerHTML = `<td class="last-name">${modifiedLast}</td>
+<td class="first-name">${modifiedFirst}</td>
 <td class="email">${contact.email_address}</td>
 <td class="contact-number">+63${contact.contact_number}</td>
 <td class="functions">
